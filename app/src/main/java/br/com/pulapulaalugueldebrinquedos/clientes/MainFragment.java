@@ -14,9 +14,8 @@ import br.com.pulapulaalugueldebrinquedos.R;
 
 public class MainFragment extends Fragment {
 
-
-
-    public MainFragment() {  }
+    public MainFragment() {
+    }
 
 
     @Override
@@ -31,7 +30,7 @@ public class MainFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.cliente_fragment_main, container, false);
 
-        if(savedInstanceState == null ){
+        if (savedInstanceState == null) {
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_cliente, new ListarFragment()).commit();
         }
         Button btnAdicionar = v.findViewById(R.id.button_adicionar_cliente);
