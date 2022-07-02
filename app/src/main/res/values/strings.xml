@@ -16,6 +16,8 @@
     <string name="excluir">Excluir</string>
     <string name="editar">Editar</string>
     <string name="listar">Listar</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 
     <!--  Strings campos do Cliente  -->
     <string name="nome_completo">Nome Completo:</string>

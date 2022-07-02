@@ -29,9 +29,7 @@ public class AdicionarFragment extends Fragment {
     private EditText etCep;
     private EditText etObservacao;
 
-    public AdicionarFragment() {
-        // Required empty public constructor
-    }
+    public AdicionarFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +53,13 @@ public class AdicionarFragment extends Fragment {
         etCep = v.findViewById(R.id.editText_cpf);
         etObservacao = v.findViewById(R.id.editText_observacao);
 
-
+        Button btnSalvar = v.findViewById(R.id.button_salvar_cliente);
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adicionar();
+            }
+        });
 
         return v;
     }
@@ -81,17 +85,17 @@ public class AdicionarFragment extends Fragment {
         } else {
             DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
             Cliente cliente = new Cliente();
-            cliente.setNomeCompleto(etNomeCompleto.getText().toString());
-            cliente.setTelefone(etTelefone.getText().toString());
-            cliente.setDataDeNascimento(etDataDeNascimento.getText().toString());
-            cliente.setCpf(etCpf.getText().toString());
-            cliente.setRua(etRua.getText().toString());
-            cliente.setNumero(etNumero.getText().toString().equals("") ? "" : etNumero.getText().toString());
-            cliente.setComplemento(etComplemento.getText().toString().equals("") ? "" : etComplemento.getText().toString());
-            cliente.setBairro(etBairro.getText().toString());
-            cliente.setCidade(etCidade.getText().toString());
-            cliente.setCep(etCep.getText().toString());
-            cliente.setObservacao(etObservacao.getText().toString().equals("") ? "" : etObservacao.getText().toString());
+            cliente.setNomeCompleto(etNomeCompleto.getText() != null ?  etNomeCompleto.getText().toString() : "" );
+            cliente.setTelefone(etTelefone.getText() != null ? etTelefone.getText().toString() : "");
+            cliente.setDataDeNascimento(etDataDeNascimento.getText() != null ? etDataDeNascimento.getText().toString() : "");
+            cliente.setCpf(etCpf.getText() != null ? etCpf.getText().toString() : "");
+            cliente.setRua( etRua.getText() != null ?  etRua.getText().toString() : "");
+            cliente.setNumero(etNumero.getText() != null ? etNumero.getText().toString()  : "");
+            cliente.setComplemento(etComplemento.getText() != null ? etComplemento.getText().toString() : "");
+            cliente.setBairro(etBairro.getText() != null ? etBairro.getText().toString() : "");
+            cliente.setCidade(etCidade.getText() != null ? etCidade.getText().toString() : "");
+            cliente.setCep(etCep.getText() != null ? etCep.getText().toString() : "");
+            cliente.setObservacao(etObservacao.getText() != null ?etObservacao.getText().toString() : "");
 
             databaseHelper.createCliente(cliente);
             Toast.makeText(getActivity(), "Cliente salvo com sucesso!", Toast.LENGTH_LONG).show();

@@ -30,9 +30,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "cep VARCHAR(20), " +
             "observacao text);";
 
-
-
-
     private static final String DROP_TABLE_CLIENTE = "DROP TABLE IF EXISTS " + TABLE_CLIENTE;
 
     public DatabaseHelper(Context context) {
