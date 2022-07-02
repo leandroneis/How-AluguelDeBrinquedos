@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">PulaPulaAluguelDeBrinquedos</string>
+
+    <!--  Strings do Menu -->
+    <string name="clientes">Clientes</string>
+    <string name="brinquedos">Brinquedos</string>
+    <string name="aluguel">Aluguel</string>
+
+    <!-- String dos titulos da tela -->
+    <string name="listar_clientes">Listar Clientes</string>
+    <string name="gerenciar_clientes">Gerenciar Clientes</string>
+
+    <!-- String dos botões -->
+    <string name="adicionar">Adicionar</string>
+    <string name="salvar">Salvar</string>
+    <string name="excluir">Excluir</string>
+    <string name="editar">Editar</string>
+    <string name="listar">Listar</string>
+
+    <!--  Strings campos do Cliente  -->
+    <string name="nome_completo">Nome Completo:</string>
+    <string name="telefone">Telefone:</string>
+    <string name="data_de_nascimento">Data de Nascimento:</string>
+    <string name="cpf">CPF:</string>
+    <string name="rua">Rua:</string>
+    <string name="numero">Número:</string>
+    <string name="complemento">Complemento:</string>
+    <string name="bairro">Bairro:</string>
+    <string name="cidade">Cidade:</string>
+    <string name="cep">CEP:</string>
+    <string name="observacao">Observação:</string>
+
+</resources>
