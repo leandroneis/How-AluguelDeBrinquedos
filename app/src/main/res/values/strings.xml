@@ -9,6 +9,8 @@
     <!-- String dos titulos da tela -->
     <string name="listar_clientes">Listar Clientes</string>
     <string name="gerenciar_clientes">Gerenciar Clientes</string>
+    <string name="listar_brinquedos">Listar Brinquedos</string>
+    <string name="gerenciar_brinquedos">Gerenciar Brinquedos</string>
 
     <!-- String dos botões -->
     <string name="adicionar">Adicionar</string>
@@ -31,5 +33,11 @@
     <string name="cidade">Cidade:</string>
     <string name="cep">CEP:</string>
     <string name="observacao">Observação:</string>
+
+
+    <!-- Strings campos do Brinquedo-->
+    <string name="nome">Nome:</string>
+    <string name="valor">Valor:</string>
+    <string name="estoque">Estoque:</string>
 
 </resources>

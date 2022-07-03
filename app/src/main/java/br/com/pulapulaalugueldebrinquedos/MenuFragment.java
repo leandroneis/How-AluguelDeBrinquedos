@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import br.com.pulapulaalugueldebrinquedos.clientes.MainFragment;
+
 public class MenuFragment extends Fragment {
 
 
@@ -33,13 +35,13 @@ public class MenuFragment extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected (MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.menu_clientes:
-                Toast.makeText(getActivity(), "Menu Clientes", Toast.LENGTH_LONG).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new MainFragment()).commit();
                 break;
             case R.id.menu_brinquedos:
-                Toast.makeText(getActivity(), "Menu Brinquedos", Toast.LENGTH_LONG).show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new br.com.pulapulaalugueldebrinquedos.brinquedos.MainFragment()).commit();
                 break;
             case R.id.menu_aluguel:
                 Toast.makeText(getActivity(), "Menu Aluguel", Toast.LENGTH_LONG).show();

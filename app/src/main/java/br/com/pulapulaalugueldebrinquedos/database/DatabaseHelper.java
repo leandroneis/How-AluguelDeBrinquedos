@@ -9,12 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
+import br.com.pulapulaalugueldebrinquedos.brinquedos.Brinquedo;
 import br.com.pulapulaalugueldebrinquedos.clientes.Cliente;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "aluguel_de_brinquedos";
     private static final String TABLE_CLIENTE = "cliente";
+    private static final String TABLE_BRINQUEDO = "brinquedo";
 
     private static final String CREATE_TABLE_CLIENTE = "CREATE TABLE " + TABLE_CLIENTE + " (" +
             "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -28,9 +30,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "bairro VARCHAR(255), " +
             "cidade VARCHAR(255), " +
             "cep VARCHAR(20), " +
-            "observacao text);";
+            "observacao text)";
+
+    private static final String CREATE_TABLE_BRINQUEDO = "CREATE TABLE " + TABLE_BRINQUEDO + "( _id INTEGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR(255), estoque int, valor real)";
 
     private static final String DROP_TABLE_CLIENTE = "DROP TABLE IF EXISTS " + TABLE_CLIENTE;
+    private static final String DROP_TABLE_BRINQUEDO = "DROP TABLE IF EXISTS " + TABLE_BRINQUEDO;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -38,12 +43,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(CREATE_TABLE_BRINQUEDO);
         db.execSQL(CREATE_TABLE_CLIENTE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DROP_TABLE_CLIENTE);
+        db.execSQL(DROP_TABLE_BRINQUEDO);
         onCreate(db);
     }
 
@@ -54,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("nome_completo",cliente.getNomeCompleto());
         cv.put("telefone",cliente.getTelefone());
         cv.put("data_de_nascimento",cliente.getDataDeNascimento());
-        cv.put("cpf",cliente.getCep());
+        cv.put("cpf",cliente.getCpf());
         cv.put("rua",cliente.getRua() );
         cv.put("numero",cliente.getNumero() );
         cv.put("complemento",cliente.getComplemento() );
@@ -72,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("nome_completo",cliente.getNomeCompleto());
         cv.put("telefone",cliente.getTelefone());
         cv.put("data_de_nascimento",cliente.getDataDeNascimento());
-        cv.put("cpf",cliente.getCep());
+        cv.put("cpf",cliente.getCpf());
         cv.put("rua",cliente.getRua() );
         cv.put("numero",cliente.getNumero() );
         cv.put("complemento",cliente.getComplemento() );
@@ -97,8 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] columns = {"_id", "nome_completo","cpf"};
         Cursor data = db.query(TABLE_CLIENTE, columns, null, null,
                 null, null, "nome_completo");
-        int[] to = {R.id.textViewIdListarCliente, R.id.textViewNomeCompletoListarCliente,
-                R.id.textViewCpfListarMedico};
+        int[] to = {R.id.textViewIdListarCliente, R.id.textViewNomeCompletoListarCliente, R.id.textViewCpfListarCliente};
         SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context,
                 R.layout.cliente_item_list_view, data, columns, to, 0);
         lv.setAdapter(simpleCursorAdapter);
@@ -131,4 +137,67 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cliente;
     }
     /* Fim CRUD Cliente */
+
+    /* Inicio do CRUD do Brinquedo */
+
+    public long createBrinquedo (Brinquedo brinquedo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("nome",brinquedo.getNome());
+        cv.put("estoque",brinquedo.getEstoque());
+        cv.put("valor",brinquedo.getValor());
+
+        long id = db.insert(TABLE_BRINQUEDO, null, cv);
+        db.close();
+        return id;
+    }
+    public long updateBrinquedo (Brinquedo brinquedo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("nome",brinquedo.getNome());
+        cv.put("estoque",brinquedo.getEstoque());
+        cv.put("valor",brinquedo.getValor());
+        long id = db.update(TABLE_BRINQUEDO, cv,
+                "_id = ?", new String[]{String.valueOf(brinquedo.getId())});
+        db.close();
+        return id;
+    }
+    public long deleteBrinquedo (Brinquedo brinquedo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long id = db.delete(TABLE_BRINQUEDO, "_id = ?",
+                new String[]{String.valueOf(brinquedo.getId())});
+        db.close();
+        return id;
+    }
+    public void getAllBrinquedo (Context context, ListView lv) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {"_id", "nome","estoque", "valor"};
+        Cursor data = db.query(TABLE_BRINQUEDO, columns, null, null,
+                null, null, "nome");
+        int[] to = {R.id.textViewIdListarBrinquedo, R.id.textViewNomeListarBrinquedo, R.id.textViewEstoqueListarBrinquedo,R.id.textViewValorListarBrinquedo};
+        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context,
+                R.layout.cliente_item_list_view, data, columns, to, 0);
+        lv.setAdapter(simpleCursorAdapter);
+        db.close();
+    }
+    public Brinquedo getByIdBrinquedo (int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {"_id", "nome","estoque", "valor"};
+        String[] args = {String.valueOf(id)};
+        Cursor data = db.query(TABLE_BRINQUEDO, columns, "_id = ?", args,
+                null, null, null);
+        data.moveToFirst();
+        Brinquedo brinquedo = new Brinquedo();
+
+        brinquedo.setId(data.getInt(0));
+        brinquedo.setNome(data.getString(1));
+        brinquedo.setEstoque(data.getInt(2));
+        brinquedo.setValor(data.getDouble(3));
+
+        data.close();
+        db.close();
+        return brinquedo;
+    }
+
+    /* Fim CRUD Brinquedo */
 }

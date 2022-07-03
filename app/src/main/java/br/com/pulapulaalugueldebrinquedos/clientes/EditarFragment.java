@@ -47,17 +47,17 @@ public class EditarFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.cliente_fragment_editar, container, false);
 
-        etNomeCompleto = v.findViewById(R.id.editText_nome_completo);
-        etTelefone = v.findViewById(R.id.editText_telefone);
-        etDataDeNascimento = v.findViewById(R.id.editText_data_de_nascimento);
-        etCpf = v.findViewById(R.id.editText_cpf);
-        etRua = v.findViewById(R.id.editText_rua);
-        etNumero = v.findViewById(R.id.editText_numero);
-        etComplemento = v.findViewById(R.id.editText_complemento);
-        etBairro = v.findViewById(R.id.editText_bairro);
-        etCidade = v.findViewById(R.id.editText_cidade);
-        etCep = v.findViewById(R.id.editText_cpf);
-        etObservacao = v.findViewById(R.id.editText_observacao);
+        etNomeCompleto = v.findViewById(R.id.editText_nome_completo_cliente);
+        etTelefone = v.findViewById(R.id.editText_telefone_cliente);
+        etDataDeNascimento = v.findViewById(R.id.editText_data_de_nascimento_cliente);
+        etCpf = v.findViewById(R.id.editText_cpf_cliente);
+        etRua = v.findViewById(R.id.editText_rua_cliente);
+        etNumero = v.findViewById(R.id.editText_numero_cliente);
+        etComplemento = v.findViewById(R.id.editText_complemento_cliente);
+        etBairro = v.findViewById(R.id.editText_bairro_cliente);
+        etCidade = v.findViewById(R.id.editText_cidade_cliente);
+        etCep = v.findViewById(R.id.editText_cep_cliente);
+        etObservacao = v.findViewById(R.id.editText_observacao_cliente);
 
         Bundle b = getArguments();
         int id_cliente = b.getInt("id");

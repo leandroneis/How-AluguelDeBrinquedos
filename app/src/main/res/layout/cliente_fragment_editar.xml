@@ -19,20 +19,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/adicionar"
+                android:text="@string/editar"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_nome_completo"
+                android:id="@+id/text_nome_completo_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/nome_completo" />
 
             <EditText
-                android:id="@+id/editText_nome_completo"
+                android:id="@+id/editText_nome_completo_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -40,14 +40,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/tex_telefone"
+                android:id="@+id/tex_telefone_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/telefone" />
 
             <EditText
-                android:id="@+id/editText_telefone"
+                android:id="@+id/editText_telefone_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -55,14 +55,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/tex_data_nascimentot"
+                android:id="@+id/tex_data_de_nascimento_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/data_de_nascimento" />
 
             <EditText
-                android:id="@+id/editText_data_de_nascimento"
+                android:id="@+id/editText_data_de_nascimento_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -70,14 +70,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/text_cpf"
+                android:id="@+id/text_cpf_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/cpf" />
 
             <EditText
-                android:id="@+id/editText_cpf"
+                android:id="@+id/editText_cpf_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -85,14 +85,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/text_rua"
+                android:id="@+id/text_rua_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/rua" />
 
             <EditText
-                android:id="@+id/editText_rua"
+                android:id="@+id/editText_rua_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -100,14 +100,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/text_numero"
+                android:id="@+id/text_numero_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/numero" />
 
             <EditText
-                android:id="@+id/editText_numero"
+                android:id="@+id/editText_numero_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -115,14 +115,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/text_complemento"
+                android:id="@+id/text_complemento_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/complemento" />
 
             <EditText
-                android:id="@+id/editText_complemento"
+                android:id="@+id/editText_complemento_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -130,14 +130,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/text_bairro"
+                android:id="@+id/text_bairro_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/bairro" />
 
             <EditText
-                android:id="@+id/editText_bairro"
+                android:id="@+id/editText_bairro_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -145,14 +145,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/text_cidade"
+                android:id="@+id/text_cidade_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/cidade" />
 
             <EditText
-                android:id="@+id/editText_cidade"
+                android:id="@+id/editText_cidade_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -161,14 +161,14 @@
 
 
             <TextView
-                android:id="@+id/text_cep"
+                android:id="@+id/text_cep_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/cep" />
 
             <EditText
-                android:id="@+id/editText_cep"
+                android:id="@+id/editText_cep_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -176,14 +176,14 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
-                android:id="@+id/text_observacao"
+                android:id="@+id/text_observacao_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:text="@string/observacao" />
 
             <EditText
-                android:id="@+id/editText_observacao"
+                android:id="@+id/editText_observacao_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
