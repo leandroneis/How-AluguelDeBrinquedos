@@ -176,7 +176,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 null, null, "nome");
         int[] to = {R.id.textViewIdListarBrinquedo, R.id.textViewNomeListarBrinquedo, R.id.textViewEstoqueListarBrinquedo,R.id.textViewValorListarBrinquedo};
         SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context,
-                R.layout.cliente_item_list_view, data, columns, to, 0);
+                R.layout.brinquedo_item_list_view, data, columns, to, 0);
         lv.setAdapter(simpleCursorAdapter);
         db.close();
     }

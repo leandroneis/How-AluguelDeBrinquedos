@@ -36,7 +36,7 @@ public class ListarFragment extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView tvId = view.findViewById(R.id.textViewIdListarCliente);
+                TextView tvId = view.findViewById(R.id.textViewIdListarBrinquedo);
                 Bundle b = new Bundle();
                 b.putInt("id", Integer.parseInt(tvId.getText().toString()));
 

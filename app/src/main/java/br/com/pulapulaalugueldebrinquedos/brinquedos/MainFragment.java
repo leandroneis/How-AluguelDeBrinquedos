@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import br.com.pulapulaalugueldebrinquedos.R;
-import br.com.pulapulaalugueldebrinquedos.clientes.AdicionarFragment;
-import br.com.pulapulaalugueldebrinquedos.clientes.ListarFragment;
 
 
 public class MainFragment extends Fragment {
@@ -31,7 +29,7 @@ public class MainFragment extends Fragment {
         View v = inflater.inflate(R.layout.brinquedo_fragment_main, container, false);
 
         if (savedInstanceState == null) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_brinquedo, new br.com.pulapulaalugueldebrinquedos.brinquedos.ListarFragment()).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_brinquedo, new ListarFragment()).commit();
         }
         Button btnAdicionar = v.findViewById(R.id.button_adicionar_brinquedo);
         btnAdicionar.setOnClickListener(new View.OnClickListener() {

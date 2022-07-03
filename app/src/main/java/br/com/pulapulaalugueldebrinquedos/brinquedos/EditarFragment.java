@@ -46,11 +46,11 @@ public class EditarFragment extends Fragment {
         brinquedo = databaseHelper.getByIdBrinquedo(id_brinquedo);
 
         etNome.setText(brinquedo.getNome());
-        etEstoque.setText(brinquedo.getEstoque());
+        etEstoque.setText(String.valueOf(brinquedo.getEstoque()));
         etValor.setText(String.valueOf(brinquedo.getValor()));
 
 
-        Button btnEditar = v.findViewById(R.id.button_editar_cliente);
+        Button btnEditar = v.findViewById(R.id.button_editar_brinquedo);
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
