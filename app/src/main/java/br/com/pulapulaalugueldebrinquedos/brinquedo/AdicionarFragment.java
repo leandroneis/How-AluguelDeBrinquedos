@@ -1,4 +1,4 @@
-package br.com.pulapulaalugueldebrinquedos.brinquedos;
+package br.com.pulapulaalugueldebrinquedos.brinquedo;
 
 import android.os.Bundle;
 
@@ -61,7 +61,6 @@ public class AdicionarFragment extends Fragment {
             brinquedo.setNome(etNome.getText() != null ?  etNome.getText().toString() : "" );
             brinquedo.setEstoque(etEstoque.getText() != null ? Integer.parseInt(etEstoque.getText().toString()) : 0);
             brinquedo.setValor(etValor.getText() != null ? Double.parseDouble(etValor.getText().toString()) : 0);
-
 
             databaseHelper.createBrinquedo(brinquedo);
             Toast.makeText(getActivity(), "Brinquedo salvo com sucesso!", Toast.LENGTH_LONG).show();

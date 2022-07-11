@@ -41,4 +41,11 @@
     <string name="estoque">Estoque:</string>
 
 
+    <!-- String campos do Aluguel -->
+    <string name="brinquedo">Brinquedo</string>
+    <string name="cliente">Cliente</string>
+    <string name="data_inicio">Data Início</string>
+    <string name="data_fim">Data Fim</string>
+
+
 </resources>

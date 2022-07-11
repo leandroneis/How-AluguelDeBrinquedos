@@ -1,4 +1,4 @@
-package br.com.pulapulaalugueldebrinquedos.brinquedos;
+package br.com.pulapulaalugueldebrinquedos.brinquedo;
 
 public class Brinquedo {
 

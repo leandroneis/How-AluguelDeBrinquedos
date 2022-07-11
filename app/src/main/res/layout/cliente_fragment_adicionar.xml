@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".clientes.AdicionarFragment">
+    tools:context=".cliente.AdicionarFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -66,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="date"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import br.com.pulapulaalugueldebrinquedos.clientes.MainFragment;
+import br.com.pulapulaalugueldebrinquedos.cliente.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
 

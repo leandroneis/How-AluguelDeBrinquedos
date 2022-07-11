@@ -1,4 +1,4 @@
-package br.com.pulapulaalugueldebrinquedos.clientes;
+package br.com.pulapulaalugueldebrinquedos.cliente;
 
 import java.time.LocalDate;
 
@@ -7,7 +7,7 @@ public class Cliente {
     private int id;
     private String nomeCompleto;
     private String telefone;
-    private String dataDeNascimento;
+    private LocalDate dataDeNascimento;
     private String cpf;
     private String rua;
     private String numero;
@@ -42,11 +42,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String getDataDeNascimento() {
+    public LocalDate getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(String dataDeNascimento) {
+    public void setDataDeNascimento(LocalDate dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 

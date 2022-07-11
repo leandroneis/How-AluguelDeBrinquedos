@@ -1,4 +1,4 @@
-package br.com.pulapulaalugueldebrinquedos.brinquedos;
+package br.com.pulapulaalugueldebrinquedos.brinquedo;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;

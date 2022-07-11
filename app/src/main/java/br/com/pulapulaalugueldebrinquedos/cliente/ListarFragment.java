@@ -1,4 +1,4 @@
-package br.com.pulapulaalugueldebrinquedos.clientes;
+package br.com.pulapulaalugueldebrinquedos.cliente;
 
 import android.os.Bundle;
 

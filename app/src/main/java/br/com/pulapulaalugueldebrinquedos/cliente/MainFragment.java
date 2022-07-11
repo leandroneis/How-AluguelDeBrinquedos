@@ -1,4 +1,4 @@
-package br.com.pulapulaalugueldebrinquedos.brinquedos;
+package br.com.pulapulaalugueldebrinquedos.cliente;
 
 import android.os.Bundle;
 
@@ -17,33 +17,35 @@ public class MainFragment extends Fragment {
     public MainFragment() {
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.brinquedo_fragment_main, container, false);
+        View v = inflater.inflate(R.layout.cliente_fragment_main, container, false);
 
         if (savedInstanceState == null) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_brinquedo, new ListarFragment()).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_cliente, new ListarFragment()).commit();
         }
-        Button btnAdicionar = v.findViewById(R.id.button_adicionar_brinquedo);
+        Button btnAdicionar = v.findViewById(R.id.button_adicionar_cliente);
         btnAdicionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_brinquedo, new AdicionarFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_cliente, new AdicionarFragment()).commit();
             }
         });
 
-        Button btnListar = v.findViewById(R.id.button_listar_brinquedo);
+        Button btnListar = v.findViewById(R.id.button_listar_cliente);
         btnListar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_brinquedo, new ListarFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_cliente, new ListarFragment()).commit();
             }
         });
 
