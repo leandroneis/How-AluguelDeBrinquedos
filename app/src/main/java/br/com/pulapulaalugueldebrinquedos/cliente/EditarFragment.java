@@ -138,11 +138,7 @@ public class EditarFragment extends Fragment {
             cliente.setId(id);
             cliente.setNomeCompleto(etNomeCompleto.getText() != null ?  etNomeCompleto.getText().toString() : "" );
             cliente.setTelefone(etTelefone.getText() != null ? etTelefone.getText().toString() : "");
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataNascimento = LocalDate.parse(etDataDeNascimento.getText().toString(),formatter);
-            cliente.setDataDeNascimento(dataNascimento);
-
+            cliente.setDataDeNascimento(etDataDeNascimento.getText().toString());
             cliente.setCpf(etCpf.getText() != null ? etCpf.getText().toString() : "");
             cliente.setRua( etRua.getText() != null ?  etRua.getText().toString() : "");
             cliente.setNumero(etNumero.getText() != null ? etNumero.getText().toString()  : "");

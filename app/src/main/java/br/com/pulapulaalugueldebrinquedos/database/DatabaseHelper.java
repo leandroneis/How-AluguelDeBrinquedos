@@ -15,7 +15,9 @@ import androidx.annotation.RequiresApi;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+import br.com.pulapulaalugueldebrinquedos.aluguel.Aluguel;
 import br.com.pulapulaalugueldebrinquedos.brinquedo.Brinquedo;
 import br.com.pulapulaalugueldebrinquedos.cliente.Cliente;
 
@@ -24,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "aluguel_de_brinquedos";
     private static final String TABLE_CLIENTE = "cliente";
     private static final String TABLE_BRINQUEDO = "brinquedo";
+    private static final String TABLE_ALUGUEL = "aluguel";
 
     private static final String CREATE_TABLE_CLIENTE = "CREATE TABLE " + TABLE_CLIENTE + " (" +
             "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -45,8 +48,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             " estoque int, " +
             " valor real)";
 
+
+    private static final String CREATE_TABLE_ALUGUEL = "CREATE TABLE " + TABLE_ALUGUEL + "(" +
+            "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "id_cliente INTEGER, " +
+            "id_brinquedo INTEGER, " +
+            "data_inicio DATE, " +
+            "data_fim DATE, " +
+            "CONSTRAINT fk_alguel_cliente FOREIGN KEY (id_cliente) REFERENCES cliente (id), " +
+            "CONSTRAINT fk_aluguel_brinquedo FOREIGN KEY (id_brinquedo) REFERENCES brinquedo (id))";
+
     private static final String DROP_TABLE_CLIENTE = "DROP TABLE IF EXISTS " + TABLE_CLIENTE;
     private static final String DROP_TABLE_BRINQUEDO = "DROP TABLE IF EXISTS " + TABLE_BRINQUEDO;
+    private static final String DROP_TABLE_ALUGUEL = "DROP TABLE IF EXISTS " + TABLE_ALUGUEL;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -56,12 +70,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_BRINQUEDO);
         db.execSQL(CREATE_TABLE_CLIENTE);
+        db.execSQL(CREATE_TABLE_ALUGUEL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DROP_TABLE_CLIENTE);
         db.execSQL(DROP_TABLE_BRINQUEDO);
+        db.execSQL(DROP_TABLE_ALUGUEL);
         onCreate(db);
     }
 
@@ -71,7 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put("nome_completo", cliente.getNomeCompleto());
         cv.put("telefone", cliente.getTelefone());
-        cv.put("data_de_nascimento", cliente.getDataDeNascimento().toString());
+        cv.put("data_de_nascimento", cliente.getDataDeNascimento());
         cv.put("cpf", cliente.getCpf());
         cv.put("rua", cliente.getRua());
         cv.put("numero", cliente.getNumero());
@@ -90,7 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put("nome_completo", cliente.getNomeCompleto());
         cv.put("telefone", cliente.getTelefone());
-        cv.put("data_de_nascimento", cliente.getDataDeNascimento().toString());
+        cv.put("data_de_nascimento", cliente.getDataDeNascimento());
         cv.put("cpf", cliente.getCpf());
         cv.put("rua", cliente.getRua());
         cv.put("numero", cliente.getNumero());
@@ -125,7 +141,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void getAllNameCliente (ArrayList<Integer> listClienteId, ArrayList<String> listClienteName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {"_id", "nome_completo"};
+        Cursor data = db.query(TABLE_CLIENTE, columns, null, null, null,
+                null, "nome_completo");
+        while (data.moveToNext()) {
+            int idColumnIndex = data.getColumnIndex("_id");
+            listClienteId.add(Integer.parseInt(data.getString(idColumnIndex)));
+            int nameColumnIndex = data.getColumnIndex("nome_completo");
+            listClienteName.add(data.getString(nameColumnIndex));
+        }
+        db.close();
+    }
+
     public Cliente getByIdCliente(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {"_id", "nome_completo", "telefone", "data_de_nascimento", "cpf", "rua", "numero", "complemento", "bairro", "cidade", "cep", "observacao"};
@@ -138,14 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cliente.setId(data.getInt(0));
         cliente.setNomeCompleto(data.getString(1));
         cliente.setTelefone(data.getString(2));
-
-        String dataDeNascimentoString = data.getString(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("[yyyy-MM-dd][dd-MM-yyyy]");
-        System.out.println("-----"+ LocalDate.parse(dataDeNascimentoString,formatter));
-        //LocalDate dataNascimento = LocalDate.parse(dataDeNascimentoString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        //cliente.setDataDeNascimento(dataNascimento);
-
-
+        cliente.setDataDeNascimento(data.getString(3));
         cliente.setCpf(data.getString(4));
         cliente.setRua(data.getString(5));
         cliente.setNumero(data.getString(6));
@@ -207,6 +229,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void getAllNameBrinquedo (ArrayList<Integer> listBrinquedoId, ArrayList<String> listBrinquedoName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {"_id", "nome"};
+        Cursor data = db.query(TABLE_BRINQUEDO, columns, null, null, null,
+                null, "nome");
+        while (data.moveToNext()) {
+            int idColumnIndex = data.getColumnIndex("_id");
+            listBrinquedoId.add(Integer.parseInt(data.getString(idColumnIndex)));
+            int nameColumnIndex = data.getColumnIndex("nome");
+            listBrinquedoName.add(data.getString(nameColumnIndex));
+        }
+        db.close();
+    }
+
     public Brinquedo getByIdBrinquedo(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] columns = {"_id", "nome", "estoque", "valor"};
@@ -227,4 +263,72 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /* Fim CRUD Brinquedo */
+
+    /* Inicio CRUD Agenda */
+
+    public long createAluguel(Aluguel aluguel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id_cliente", aluguel.getId_cliente());
+        cv.put("id_brinquedo", aluguel.getId_brinquedo());
+        cv.put("data_inicio", aluguel.getDataInicio());
+        cv.put("data_fim", aluguel.getDataFim());
+
+        long id = db.insert(TABLE_ALUGUEL, null, cv);
+        db.close();
+        return id;
+    }
+
+    public long updateAluguel(Aluguel aluguel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("id_cliente", aluguel.getId_cliente());
+        cv.put("id_brinquedo", aluguel.getId_brinquedo());
+        cv.put("data_inicio", aluguel.getDataInicio());
+        cv.put("data_fim", aluguel.getDataFim());
+        long rows = db.update(TABLE_ALUGUEL, cv, "_id = ?", new String[]{String.valueOf(aluguel.getId())});
+        db.close();
+        return rows;
+    }
+
+    public long deleteAluguel(Aluguel aluguel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long rows = db.delete(TABLE_ALUGUEL, "_id = ?", new String[]{String.valueOf(aluguel.getId())});
+        db.close();
+        return rows;
+    }
+
+//    public void getAllAluguel(Context context, ListView lv) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String[] columns = {"_id", "nome", "estoque", "valor"};
+//        Cursor data = db.query(TABLE_ALUGUEL, columns, null, null,
+//                null, null, "nome");
+//        int[] to = {R.id.textViewIdListarAluguel, R.id.textViewNomeListarAluguel, R.id.textViewEstoqueListarAluguel, R.id.textViewValorListarAluguel};
+//        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context,
+//                R.layout.brinquedo_item_list_view, data, columns, to, 0);
+//        lv.setAdapter(simpleCursorAdapter);
+//        db.close();
+//    }
+
+    public Aluguel getByIdAluguel(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = {"_id", "id_cliente", "id_brinquedo", "data_inicio", "data_fim"};
+        String[] args = {String.valueOf(id)};
+        Cursor data = db.query(TABLE_ALUGUEL, columns, "_id = ?", args, null,
+                null, null);
+        data.moveToFirst();
+        Aluguel aluguel = new Aluguel();
+        aluguel.setId(data.getInt(0));
+        aluguel.setId_cliente(data.getInt(1));
+        aluguel.setId_cliente(data.getInt(2));
+        aluguel.setDataInicio(data.getString(3));
+        aluguel.setDataFim(data.getString(4));
+        data.close();
+        db.close();
+        return aluguel;
+    }
+
+
+
+    /* Fim CRUD Agenda */
 }

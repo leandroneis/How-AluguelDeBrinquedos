@@ -7,7 +7,7 @@ public class Cliente {
     private int id;
     private String nomeCompleto;
     private String telefone;
-    private LocalDate dataDeNascimento;
+    private String dataDeNascimento;
     private String cpf;
     private String rua;
     private String numero;
@@ -42,11 +42,11 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public LocalDate getDataDeNascimento() {
+    public String getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(LocalDate dataDeNascimento) {
+    public void setDataDeNascimento(String dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 

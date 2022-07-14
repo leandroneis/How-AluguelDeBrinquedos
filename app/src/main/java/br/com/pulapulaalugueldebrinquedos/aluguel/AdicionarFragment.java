@@ -1,17 +1,32 @@
 package br.com.pulapulaalugueldebrinquedos.aluguel;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
+import androidx.fragment.app.Fragment;
+
+import java.util.ArrayList;
 
 import br.com.pulapulaalugueldebrinquedos.R;
-
+import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 
 public class AdicionarFragment extends Fragment {
+
+    EditText etDataInicio;
+    EditText etDataFim;
+    Spinner spCliente;
+    Spinner spBrinquedo;
+    ArrayList<Integer> listClienteId;
+    ArrayList<String> listClienteName;
+    ArrayList<Integer> listBrinquedoId;
+    ArrayList<String> listBrinquedoName;
+    DatabaseHelper databaseHelper;
 
     public AdicionarFragment() { }
 
@@ -23,6 +38,63 @@ public class AdicionarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.aluguel_fragment_adicionar, container, false);
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.aluguel_fragment_adicionar, container, false);
+
+        etDataInicio= v.findViewById(R.id.editTextDataInicioAluguel);
+        etDataFim= v.findViewById(R.id.editTextDataFimAluguel);
+        spCliente= v.findViewById(R.id.spinnerClienteAluguel);
+        spBrinquedo= v.findViewById(R.id.spinnerBrinquedoAluguel);
+
+        databaseHelper = new DatabaseHelper(getActivity());
+
+        listClienteId = new ArrayList<>();
+        listClienteName = new ArrayList<>();
+        databaseHelper.getAllNameCliente(listClienteId, listClienteName);
+
+        listBrinquedoId = new ArrayList<>();
+        listBrinquedoName = new ArrayList<>();
+        databaseHelper.getAllNameBrinquedo(listBrinquedoId, listBrinquedoName);
+
+        ArrayAdapter<String> spClienteArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, listClienteName);
+        spCliente.setAdapter(spClienteArrayAdapter);
+
+        ArrayAdapter<String> spBrinquedoArrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, listBrinquedoName);
+        spBrinquedo.setAdapter(spBrinquedoArrayAdapter);
+
+        Button btnSalvar = v.findViewById(R.id.button_salvar_brinquedo);
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adicionar();
+            }
+        });
+
+        return v;
     }
+
+    private void adicionar () {
+        if (spCliente.getSelectedItem() == null) {
+            Toast.makeText(getActivity(), "Por favor, selecione o cliente!", Toast.LENGTH_LONG).show();
+        } else if (spBrinquedo.getSelectedItem() == null) {
+            Toast.makeText(getActivity(), "Por favor, selecione o brinquedo!", Toast.LENGTH_LONG).show();
+        } else if (etDataInicio.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), "Por favor, informe a data de início!", Toast.LENGTH_LONG).show();
+        } else if (etDataFim.getText().toString().equals("")) {
+            Toast.makeText(getActivity(), "Por favor, informe a data nascimento!", Toast.LENGTH_LONG).show();
+        } else {
+            Aluguel aluguel = new Aluguel();
+            String nomeCliente = spCliente.getSelectedItem().toString();
+            aluguel.setId_cliente(listClienteId.get(listClienteName.indexOf(nomeCliente)));
+            String nomeMedico = spBrinquedo.getSelectedItem().toString();
+            aluguel.setId_brinquedo(listBrinquedoId.get(listBrinquedoName.indexOf(nomeMedico)));
+            aluguel.setDataInicio(etDataInicio.getText().toString());
+            aluguel.setDataFim(etDataFim.getText().toString());
+
+            databaseHelper.createAluguel(aluguel);
+            Toast.makeText(getActivity(), "Bebê salvo!", Toast.LENGTH_LONG).show();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_aluguel, new ListarFragment()).commit();
+        }
+    }
+
 }
