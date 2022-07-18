@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".clientes.EditarFragment">
+    tools:context=".cliente.EditarFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -85,6 +85,21 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <TextView
+                android:id="@+id/text_cep_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/cep" />
+
+            <EditText
+                android:id="@+id/editText_cep_cliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
                 android:id="@+id/text_rua_cliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,22 +174,6 @@
                 android:inputType="textPersonName"
                 tools:ignore="SpeakableTextPresentCheck" />
 
-
-            <TextView
-                android:id="@+id/text_cep_cliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:text="@string/cep" />
-
-            <EditText
-                android:id="@+id/editText_cep_cliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                tools:ignore="SpeakableTextPresentCheck" />
-
             <TextView
                 android:id="@+id/text_observacao_cliente"
                 android:layout_width="match_parent"
@@ -193,6 +192,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <Button

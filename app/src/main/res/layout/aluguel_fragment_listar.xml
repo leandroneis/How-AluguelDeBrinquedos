@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".brinquedo.ListarFragment">
+    tools:context=".aluguel.ListarFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,13 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/listar_brinquedos"
+            android:text="@string/listar_aluguel"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <ListView
-            android:id="@+id/list_view_listar_brinquedos"
+            android:id="@+id/list_view_listar_aluguel"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

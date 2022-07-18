@@ -1,7 +1,9 @@
-package br.com.pulapulaalugueldebrinquedos.clientes;
+package br.com.pulapulaalugueldebrinquedos.cliente;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -11,8 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ExecutionException;
+
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
+import br.com.pulapulaalugueldebrinquedos.webservice.DadosEndereco;
+import br.com.pulapulaalugueldebrinquedos.webservice.RetornarEnderecoPeloCep;
 
 
 public class AdicionarFragment extends Fragment {
@@ -53,8 +61,29 @@ public class AdicionarFragment extends Fragment {
         etCep = v.findViewById(R.id.editText_cep_cliente);
         etObservacao = v.findViewById(R.id.editText_observacao_cliente);
 
+        etCep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    try {
+                        DadosEndereco dadosEndereco = new RetornarEnderecoPeloCep(etCep.getText().toString()).execute().get();
+                        etRua.setText(dadosEndereco.getLogradouro());
+                        etBairro.setText(dadosEndereco.getBairro());
+                        etCidade.setText(dadosEndereco.getLocalidade());
+
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+
         Button btnSalvar = v.findViewById(R.id.button_salvar_cliente);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 adicionar();
@@ -64,6 +93,7 @@ public class AdicionarFragment extends Fragment {
         return v;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void adicionar() {
         if (etNomeCompleto.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "Por favor, informe o nome completo do cliente", Toast.LENGTH_LONG).show();
@@ -87,7 +117,9 @@ public class AdicionarFragment extends Fragment {
             Cliente cliente = new Cliente();
             cliente.setNomeCompleto(etNomeCompleto.getText() != null ?  etNomeCompleto.getText().toString() : "" );
             cliente.setTelefone(etTelefone.getText() != null ? etTelefone.getText().toString() : "");
-            cliente.setDataDeNascimento(etDataDeNascimento.getText() != null ? etDataDeNascimento.getText().toString() : "");
+
+            cliente.setDataDeNascimento(etDataDeNascimento.getText().toString());
+
             cliente.setCpf(etCpf.getText() != null ? etCpf.getText().toString() : "");
             cliente.setRua( etRua.getText() != null ?  etRua.getText().toString() : "");
             cliente.setNumero(etNumero.getText() != null ? etNumero.getText().toString()  : "");

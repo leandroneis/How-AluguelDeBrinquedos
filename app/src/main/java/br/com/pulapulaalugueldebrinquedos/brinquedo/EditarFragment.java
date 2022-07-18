@@ -1,4 +1,4 @@
-package br.com.pulapulaalugueldebrinquedos.brinquedos;
+package br.com.pulapulaalugueldebrinquedos.brinquedo;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,13 +35,13 @@ public class EditarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.brinquedo_fragment_editar, container, false);
+        Bundle b = getArguments();
+        int id_brinquedo = b.getInt("id");
 
         etNome = v.findViewById(R.id.editText_nome_brinquedo);
         etEstoque = v.findViewById(R.id.editText_estoque_brinquedo);
         etValor = v.findViewById(R.id.editText_valor_brinquedo);
 
-        Bundle b = getArguments();
-        int id_brinquedo = b.getInt("id");
         databaseHelper = new DatabaseHelper(getActivity());
         brinquedo = databaseHelper.getByIdBrinquedo(id_brinquedo);
 

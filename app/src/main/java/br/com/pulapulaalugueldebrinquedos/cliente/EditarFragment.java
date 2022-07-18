@@ -1,9 +1,11 @@
-package br.com.pulapulaalugueldebrinquedos.clientes;
+package br.com.pulapulaalugueldebrinquedos.cliente;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,8 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.concurrent.ExecutionException;
+
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
+import br.com.pulapulaalugueldebrinquedos.webservice.DadosEndereco;
+import br.com.pulapulaalugueldebrinquedos.webservice.RetornarEnderecoPeloCep;
 
 public class EditarFragment extends Fragment {
 
@@ -41,11 +47,14 @@ public class EditarFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        
         View v = inflater.inflate(R.layout.cliente_fragment_editar, container, false);
+        Bundle b = getArguments();
+        int id_cliente = b.getInt("id");
 
         etNomeCompleto = v.findViewById(R.id.editText_nome_completo_cliente);
         etTelefone = v.findViewById(R.id.editText_telefone_cliente);
@@ -59,14 +68,13 @@ public class EditarFragment extends Fragment {
         etCep = v.findViewById(R.id.editText_cep_cliente);
         etObservacao = v.findViewById(R.id.editText_observacao_cliente);
 
-        Bundle b = getArguments();
-        int id_cliente = b.getInt("id");
+
         databaseHelper = new DatabaseHelper(getActivity());
         cliente = databaseHelper.getByIdCliente(id_cliente);
 
         etNomeCompleto.setText(cliente.getNomeCompleto());
         etTelefone.setText(cliente.getTelefone());
-        etDataDeNascimento.setText(cliente.getDataDeNascimento());
+        etDataDeNascimento.setText(cliente.getDataDeNascimento() != null ? cliente.getDataDeNascimento().toString() : "");
         etCpf.setText(cliente.getCpf());
         etRua.setText(cliente.getRua());
         etNumero.setText(cliente.getNumero());
@@ -76,8 +84,29 @@ public class EditarFragment extends Fragment {
         etCep.setText(cliente.getCep());
         etObservacao.setText(cliente.getObservacao());
 
+        etCep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(!cliente.getCep().equals(etCep.getText().toString()))
+                    try {
+                        DadosEndereco dadosEndereco = new RetornarEnderecoPeloCep(etCep.getText().toString()).execute().get();
+                        etRua.setText(dadosEndereco.getLogradouro());
+                        etBairro.setText(dadosEndereco.getBairro());
+                        etCidade.setText(dadosEndereco.getLocalidade());
+
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
         Button btnEditar = v.findViewById(R.id.button_editar_cliente);
         btnEditar.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 editar(id_cliente);
@@ -97,10 +126,7 @@ public class EditarFragment extends Fragment {
                 });
                 builder.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // Não faz nada
-                    }
-                });
+                    public void onClick(DialogInterface dialogInterface, int i) {}});
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
             }
@@ -108,6 +134,7 @@ public class EditarFragment extends Fragment {
         return v;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void editar(int id) {
         if (etNomeCompleto.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "Por favor, informe o nome completo do cliente", Toast.LENGTH_LONG).show();
@@ -130,7 +157,7 @@ public class EditarFragment extends Fragment {
             cliente.setId(id);
             cliente.setNomeCompleto(etNomeCompleto.getText() != null ?  etNomeCompleto.getText().toString() : "" );
             cliente.setTelefone(etTelefone.getText() != null ? etTelefone.getText().toString() : "");
-            cliente.setDataDeNascimento(etDataDeNascimento.getText() != null ? etDataDeNascimento.getText().toString() : "");
+            cliente.setDataDeNascimento(etDataDeNascimento.getText().toString());
             cliente.setCpf(etCpf.getText() != null ? etCpf.getText().toString() : "");
             cliente.setRua( etRua.getText() != null ?  etRua.getText().toString() : "");
             cliente.setNumero(etNumero.getText() != null ? etNumero.getText().toString()  : "");

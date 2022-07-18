@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".brinquedo.MainFragment">
+    tools:context=".aluguel.MainFragment">
 
 
     <LinearLayout
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="@string/gerenciar_brinquedos"
+            android:text="@string/gerenciar_aluguel"
             android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -27,7 +27,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_listar_brinquedo"
+                android:id="@+id/button_listar_aluguel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
@@ -35,7 +35,7 @@
                 android:text="@string/listar" />
 
             <Button
-                android:id="@+id/button_adicionar_brinquedo"
+                android:id="@+id/button_adicionar_aluguel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -45,7 +45,7 @@
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/frame_brinquedo"
+            android:id="@+id/frame_aluguel"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

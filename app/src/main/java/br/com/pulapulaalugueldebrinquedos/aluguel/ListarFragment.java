@@ -1,4 +1,4 @@
-package br.com.pulapulaalugueldebrinquedos.clientes;
+package br.com.pulapulaalugueldebrinquedos.aluguel;
 
 import android.os.Bundle;
 
@@ -27,23 +27,23 @@ public class ListarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.cliente_fragment_listar, container, false);
+        View v = inflater.inflate(R.layout.aluguel_fragment_listar, container, false);
 
         DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
-        ListView lv = v.findViewById(R.id.list_view_listar_clientes);
-        databaseHelper.getAllCliente(getActivity(), lv);
+        ListView lv = v.findViewById(R.id.list_view_listar_aluguel);
+        databaseHelper.getAllAluguel(getActivity(), lv);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView tvId = view.findViewById(R.id.textViewIdListarCliente);
+                TextView tvId = view.findViewById(R.id.textViewIdListarAluguel);
                 Bundle b = new Bundle();
                 b.putInt("id", Integer.parseInt(tvId.getText().toString()));
 
                 EditarFragment editar = new EditarFragment();
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 editar.setArguments(b);
-                ft.replace(R.id.frame_cliente, editar).commit();
+                ft.replace(R.id.frame_aluguel, editar).commit();
             }
         });
 
