@@ -15,9 +15,12 @@ import android.widget.Toast;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ExecutionException;
 
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
+import br.com.pulapulaalugueldebrinquedos.webservice.DadosEndereco;
+import br.com.pulapulaalugueldebrinquedos.webservice.RetornarEnderecoPeloCep;
 
 
 public class AdicionarFragment extends Fragment {
@@ -57,6 +60,26 @@ public class AdicionarFragment extends Fragment {
         etCidade = v.findViewById(R.id.editText_cidade_cliente);
         etCep = v.findViewById(R.id.editText_cep_cliente);
         etObservacao = v.findViewById(R.id.editText_observacao_cliente);
+
+        etCep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    try {
+                        DadosEndereco dadosEndereco = new RetornarEnderecoPeloCep(etCep.getText().toString()).execute().get();
+                        etRua.setText(dadosEndereco.getLogradouro());
+                        etBairro.setText(dadosEndereco.getBairro());
+                        etCidade.setText(dadosEndereco.getLocalidade());
+
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
 
         Button btnSalvar = v.findViewById(R.id.button_salvar_cliente);
         btnSalvar.setOnClickListener(new View.OnClickListener() {

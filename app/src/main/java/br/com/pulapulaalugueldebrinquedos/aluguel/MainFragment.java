@@ -14,8 +14,7 @@ import br.com.pulapulaalugueldebrinquedos.R;
 
 public class MainFragment extends Fragment {
 
-    public MainFragment() {
-    }
+    public MainFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,10 +24,11 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.aluguel_fragment_main, container, false);
 
-        if (savedInstanceState == null) {
+        if(savedInstanceState == null){
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_aluguel, new ListarFragment()).commit();
         }
         Button btnAdicionar = v.findViewById(R.id.button_adicionar_aluguel);

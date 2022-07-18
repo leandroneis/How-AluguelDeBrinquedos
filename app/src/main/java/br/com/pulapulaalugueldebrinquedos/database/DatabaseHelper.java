@@ -219,10 +219,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void getAllBrinquedo(Context context, ListView lv) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {"_id", "nome", "estoque", "valor"};
+        String[] columns = {"_id", "nome"};
         Cursor data = db.query(TABLE_BRINQUEDO, columns, null, null,
                 null, null, "nome");
-        int[] to = {R.id.textViewIdListarBrinquedo, R.id.textViewNomeListarBrinquedo, R.id.textViewEstoqueListarBrinquedo, R.id.textViewValorListarBrinquedo};
+        int[] to = {R.id.textViewIdListarBrinquedo, R.id.textViewNomeListarBrinquedo};
         SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context,
                 R.layout.brinquedo_item_list_view, data, columns, to, 0);
         lv.setAdapter(simpleCursorAdapter);
@@ -298,17 +298,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rows;
     }
 
-//    public void getAllAluguel(Context context, ListView lv) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String[] columns = {"_id", "nome", "estoque", "valor"};
-//        Cursor data = db.query(TABLE_ALUGUEL, columns, null, null,
-//                null, null, "nome");
-//        int[] to = {R.id.textViewIdListarAluguel, R.id.textViewNomeListarAluguel, R.id.textViewEstoqueListarAluguel, R.id.textViewValorListarAluguel};
-//        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context,
-//                R.layout.brinquedo_item_list_view, data, columns, to, 0);
-//        lv.setAdapter(simpleCursorAdapter);
-//        db.close();
-//    }
+    public void getAllAluguel(Context context, ListView lv) {
+        String sql = "       SELECT a._id,a.id_cliente,a.id_brinquedo,a.data_inicio,a.data_fim,cli.nome_completo, bri.nome \n" +
+                "            FROM aluguel a INNER JOIN cliente cli \n" +
+                "                ON a.id_cliente = cli._id \n" +
+                "            INNER JOIN brinquedo bri \n" +
+                "                ON a.id_brinquedo = bri._id";
+
+        String[] columns = {"_id","id_cliente","id_brinquedo","data_inicio","data_fim","nome_completo","nome"};
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery(sql,null);
+
+        int[] to = {R.id.textViewIdListarAluguel,R.id.textViewClienteAluguel,R.id.textViewBrinquedoAluguel, R.id.textViewDataInicioAluguel,R.id.textViewDataFimAluguel , R.id.textViewNomeClienteAluguel, R.id.textViewNomeBrinquedoAluguel};
+
+
+        SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(context, R.layout.aluguel_item_list_view, data, columns, to, 0);
+        lv.setAdapter(simpleCursorAdapter);
+        db.close();
+    }
+
+
 
     public Aluguel getByIdAluguel(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -327,8 +336,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return aluguel;
     }
-
-
 
     /* Fim CRUD Agenda */
 }

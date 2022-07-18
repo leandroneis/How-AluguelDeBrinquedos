@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import br.com.pulapulaalugueldebrinquedos.cliente.MainFragment;
 
@@ -43,8 +44,7 @@ public class MenuFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new br.com.pulapulaalugueldebrinquedos.brinquedo.MainFragment()).commit();
                 break;
             case R.id.menu_aluguel:
-                System.out.println("MENU ALUGUEL-> " + R.id.menu_aluguel);
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_main, new br.com.pulapulaalugueldebrinquedos.aluguel.MainFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_main,new br.com.pulapulaalugueldebrinquedos.aluguel.MainFragment()).commit();
                 break;
         }
         return super.onOptionsItemSelected(item);

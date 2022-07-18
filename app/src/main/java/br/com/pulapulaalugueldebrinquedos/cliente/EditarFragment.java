@@ -15,11 +15,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ExecutionException;
 
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
+import br.com.pulapulaalugueldebrinquedos.webservice.DadosEndereco;
+import br.com.pulapulaalugueldebrinquedos.webservice.RetornarEnderecoPeloCep;
 
 public class EditarFragment extends Fragment {
 
@@ -52,6 +53,8 @@ public class EditarFragment extends Fragment {
                              Bundle savedInstanceState) {
         
         View v = inflater.inflate(R.layout.cliente_fragment_editar, container, false);
+        Bundle b = getArguments();
+        int id_cliente = b.getInt("id");
 
         etNomeCompleto = v.findViewById(R.id.editText_nome_completo_cliente);
         etTelefone = v.findViewById(R.id.editText_telefone_cliente);
@@ -65,8 +68,7 @@ public class EditarFragment extends Fragment {
         etCep = v.findViewById(R.id.editText_cep_cliente);
         etObservacao = v.findViewById(R.id.editText_observacao_cliente);
 
-        Bundle b = getArguments();
-        int id_cliente = b.getInt("id");
+
         databaseHelper = new DatabaseHelper(getActivity());
         cliente = databaseHelper.getByIdCliente(id_cliente);
 
@@ -81,6 +83,26 @@ public class EditarFragment extends Fragment {
         etCidade.setText(cliente.getCidade());
         etCep.setText(cliente.getCep());
         etObservacao.setText(cliente.getObservacao());
+
+        etCep.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(!cliente.getCep().equals(etCep.getText().toString()))
+                    try {
+                        DadosEndereco dadosEndereco = new RetornarEnderecoPeloCep(etCep.getText().toString()).execute().get();
+                        etRua.setText(dadosEndereco.getLogradouro());
+                        etBairro.setText(dadosEndereco.getBairro());
+                        etCidade.setText(dadosEndereco.getLocalidade());
+
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
         Button btnEditar = v.findViewById(R.id.button_editar_cliente);
         btnEditar.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +126,7 @@ public class EditarFragment extends Fragment {
                 });
                 builder.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // Não faz nada
-                    }
-                });
+                    public void onClick(DialogInterface dialogInterface, int i) {}});
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
             }

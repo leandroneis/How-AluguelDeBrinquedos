@@ -31,12 +31,12 @@ public class ListarFragment extends Fragment {
 
         DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
         ListView lv = v.findViewById(R.id.list_view_listar_aluguel);
-        databaseHelper.getAllBrinquedo(getActivity(), lv);
+        databaseHelper.getAllAluguel(getActivity(), lv);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView tvId = view.findViewById(R.id.textViewIdListarBrinquedo);
+                TextView tvId = view.findViewById(R.id.textViewIdListarAluguel);
                 Bundle b = new Bundle();
                 b.putInt("id", Integer.parseInt(tvId.getText().toString()));
 

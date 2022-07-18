@@ -18,15 +18,15 @@ import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 
 public class AdicionarFragment extends Fragment {
 
-    EditText etDataInicio;
-    EditText etDataFim;
-    Spinner spCliente;
-    Spinner spBrinquedo;
-    ArrayList<Integer> listClienteId;
-    ArrayList<String> listClienteName;
-    ArrayList<Integer> listBrinquedoId;
-    ArrayList<String> listBrinquedoName;
-    DatabaseHelper databaseHelper;
+    private EditText etDataInicio;
+    private EditText etDataFim;
+    private Spinner spCliente;
+    private Spinner spBrinquedo;
+    private ArrayList<Integer> listClienteId;
+    private ArrayList<String> listClienteName;
+    private ArrayList<Integer> listBrinquedoId;
+    private ArrayList<String> listBrinquedoName;
+    private DatabaseHelper databaseHelper;
 
     public AdicionarFragment() { }
 
@@ -81,18 +81,18 @@ public class AdicionarFragment extends Fragment {
         } else if (etDataInicio.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "Por favor, informe a data de início!", Toast.LENGTH_LONG).show();
         } else if (etDataFim.getText().toString().equals("")) {
-            Toast.makeText(getActivity(), "Por favor, informe a data nascimento!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Por favor, informe a data de fim!", Toast.LENGTH_LONG).show();
         } else {
             Aluguel aluguel = new Aluguel();
             String nomeCliente = spCliente.getSelectedItem().toString();
             aluguel.setId_cliente(listClienteId.get(listClienteName.indexOf(nomeCliente)));
-            String nomeMedico = spBrinquedo.getSelectedItem().toString();
-            aluguel.setId_brinquedo(listBrinquedoId.get(listBrinquedoName.indexOf(nomeMedico)));
+            String nomeBrinquedo = spBrinquedo.getSelectedItem().toString();
+            aluguel.setId_brinquedo(listBrinquedoId.get(listBrinquedoName.indexOf(nomeBrinquedo)));
             aluguel.setDataInicio(etDataInicio.getText().toString());
             aluguel.setDataFim(etDataFim.getText().toString());
 
             databaseHelper.createAluguel(aluguel);
-            Toast.makeText(getActivity(), "Bebê salvo!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Aluguel salvo!", Toast.LENGTH_LONG).show();
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_aluguel, new ListarFragment()).commit();
         }
     }
