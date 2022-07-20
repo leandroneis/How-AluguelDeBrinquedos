@@ -15,7 +15,7 @@ import android.widget.TextView;
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 
-
+/*Classe responsavel por listar os registros do cadastro de aluguel*/
 public class ListarFragment extends Fragment {
 
     public ListarFragment() { }

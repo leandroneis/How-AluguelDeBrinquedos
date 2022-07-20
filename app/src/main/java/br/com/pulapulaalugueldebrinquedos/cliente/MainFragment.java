@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import br.com.pulapulaalugueldebrinquedos.R;
 
-
+/*Classe responsável por carregar os botões de adicionar e listar em um fragmento de tela*/
 public class MainFragment extends Fragment {
 
     public MainFragment() {

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 
+/*Classe responsavel para editar um registro do cadastro de brinquedo*/
 public class EditarFragment extends Fragment {
 
     private EditText etNome;
@@ -79,7 +80,7 @@ public class EditarFragment extends Fragment {
         });
         return v;
     }
-
+    /*Método responsável para validar campos obrigatórios e inlcuir o registro do brinquedo que foi editado*/
     private void editar(int id) {
         if (etNome.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "Por favor, informe o nome do brinquedo", Toast.LENGTH_LONG).show();
@@ -100,7 +101,7 @@ public class EditarFragment extends Fragment {
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_brinquedo, new ListarFragment()).commit();
         }
     }
-
+    /*Método responsável para excluir um registro do brinquedo */
     private void excluir(int id) {
         brinquedo = new Brinquedo();
         brinquedo.setId(id);

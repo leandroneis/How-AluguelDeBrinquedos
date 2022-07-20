@@ -1,5 +1,6 @@
 package br.com.pulapulaalugueldebrinquedos.brinquedo;
 
+/* Classe brinquedo e seus atributos */
 public class Brinquedo {
 
     private int id;

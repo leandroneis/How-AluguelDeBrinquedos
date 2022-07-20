@@ -21,7 +21,7 @@ import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 import br.com.pulapulaalugueldebrinquedos.webservice.DadosEndereco;
 import br.com.pulapulaalugueldebrinquedos.webservice.RetornarEnderecoPeloCep;
-
+/*Classe responsavel para editar um registro do cadastro de cliente*/
 public class EditarFragment extends Fragment {
 
     private EditText etNomeCompleto;
@@ -38,16 +38,14 @@ public class EditarFragment extends Fragment {
     private DatabaseHelper databaseHelper;
     private Cliente cliente;
 
-    public EditarFragment() {
-        // Required empty public constructor
-    }
+    public EditarFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -106,7 +104,6 @@ public class EditarFragment extends Fragment {
 
         Button btnEditar = v.findViewById(R.id.button_editar_cliente);
         btnEditar.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 editar(id_cliente);
@@ -134,7 +131,7 @@ public class EditarFragment extends Fragment {
         return v;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    /*Método responsável para validar campos obrigatórios e inlcuir o registro do cliente que foi editado*/
     private void editar(int id) {
         if (etNomeCompleto.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "Por favor, informe o nome completo do cliente", Toast.LENGTH_LONG).show();
@@ -172,7 +169,7 @@ public class EditarFragment extends Fragment {
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_cliente, new ListarFragment()).commit();
         }
     }
-
+    /*Método responsável para excluir um registro do cliente */
     private void excluir(int id) {
         cliente = new Cliente();
         cliente.setId(id);

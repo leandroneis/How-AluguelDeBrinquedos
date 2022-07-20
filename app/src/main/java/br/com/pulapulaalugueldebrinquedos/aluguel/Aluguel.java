@@ -1,5 +1,6 @@
 package br.com.pulapulaalugueldebrinquedos.aluguel;
 
+/* Classe aluguel e seus atributos */
 public class Aluguel {
 
     private int id;
@@ -7,7 +8,6 @@ public class Aluguel {
     private int id_cliente;
     private String dataInicio;
     private String dataFim;
-    //private Double total;
 
     public Aluguel(){}
 
@@ -50,12 +50,4 @@ public class Aluguel {
     public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
-//
-//    public Double getTotal() {
-//        return total;
-//    }
-//
-//    public void setTotal(Double total) {
-//        this.total = total;
-//    }
 }

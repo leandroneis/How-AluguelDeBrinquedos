@@ -21,6 +21,7 @@ import br.com.pulapulaalugueldebrinquedos.aluguel.Aluguel;
 import br.com.pulapulaalugueldebrinquedos.brinquedo.Brinquedo;
 import br.com.pulapulaalugueldebrinquedos.cliente.Cliente;
 
+/* Classe responsável por criar as tabelas e executar os CRUDS no sqlite */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "aluguel_de_brinquedos";
@@ -298,6 +299,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rows;
     }
 
+    /* Utilizei sql com inner join para fazer a junção de tabelas brinquedo,cliente e aluguel */
     public void getAllAluguel(Context context, ListView lv) {
         String sql = "       SELECT a._id,a.id_cliente,a.id_brinquedo,a.data_inicio,a.data_fim,cli.nome_completo, bri.nome \n" +
                 "            FROM aluguel a INNER JOIN cliente cli \n" +

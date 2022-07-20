@@ -1,7 +1,6 @@
 package br.com.pulapulaalugueldebrinquedos.cliente;
 
-import java.time.LocalDate;
-
+/* Classe cliente e seus atributos */
 public class Cliente {
 
     private int id;

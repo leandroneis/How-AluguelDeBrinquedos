@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 
+/*Classe responsavel para editar um registro do cadastro de aluguel*/
 public class EditarFragment extends Fragment {
 
     private EditText etDataInicio;
@@ -107,6 +108,8 @@ public class EditarFragment extends Fragment {
         return v;
     }
 
+    /*Método responsável para validar campos obrigatórios e inlcuir o registro de aluguel que foi editado*/
+
     private void editar(int id) {
         if (spCliente.getSelectedItem() == null) {
             Toast.makeText(getActivity(), "Por favor, selecione o cliente!", Toast.LENGTH_LONG).show();
@@ -133,6 +136,7 @@ public class EditarFragment extends Fragment {
         }
     }
 
+    /*Método responsável para excluir um registro de aluguel*/
     private void excluir(int id) {
         aluguel = new Aluguel();
         aluguel.setId(id);

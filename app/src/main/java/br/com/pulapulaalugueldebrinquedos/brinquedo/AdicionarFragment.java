@@ -14,7 +14,7 @@ import android.widget.Toast;
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 
-
+/*Classe responsavel para adicionar o registro do cadastro de brinquedo*/
 public class AdicionarFragment extends Fragment {
 
     private EditText etNome;
@@ -48,6 +48,7 @@ public class AdicionarFragment extends Fragment {
         return v;
     }
 
+    /*Método responsável para validar campos obrigatórios e inlcuir um novo registro de brinquedo*/
     private void adicionar() {
         if (etNome.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "Por favor, informe o nome do brinquedo", Toast.LENGTH_LONG).show();

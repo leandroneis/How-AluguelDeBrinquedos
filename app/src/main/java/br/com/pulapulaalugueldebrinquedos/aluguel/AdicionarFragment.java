@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import br.com.pulapulaalugueldebrinquedos.R;
 import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 
+
+/*Classe responsavel para adicionar o registro do cadastro de aluguel*/
 public class AdicionarFragment extends Fragment {
 
     private EditText etDataInicio;
@@ -38,7 +40,6 @@ public class AdicionarFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.aluguel_fragment_adicionar, container, false);
 
         etDataInicio= v.findViewById(R.id.editTextDataInicioAluguel);
@@ -72,7 +73,7 @@ public class AdicionarFragment extends Fragment {
 
         return v;
     }
-
+    /*Método responsável para validar campos obrigatórios e inlcuir um novo registro de aluguel*/
     private void adicionar () {
         if (spCliente.getSelectedItem() == null) {
             Toast.makeText(getActivity(), "Por favor, selecione o cliente!", Toast.LENGTH_LONG).show();

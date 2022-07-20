@@ -22,7 +22,7 @@ import br.com.pulapulaalugueldebrinquedos.database.DatabaseHelper;
 import br.com.pulapulaalugueldebrinquedos.webservice.DadosEndereco;
 import br.com.pulapulaalugueldebrinquedos.webservice.RetornarEnderecoPeloCep;
 
-
+/*Classe responsavel para adicionar o registro do cadastro de cliente*/
 public class AdicionarFragment extends Fragment {
 
     private EditText etNomeCompleto;
@@ -83,7 +83,6 @@ public class AdicionarFragment extends Fragment {
 
         Button btnSalvar = v.findViewById(R.id.button_salvar_cliente);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 adicionar();
@@ -93,7 +92,7 @@ public class AdicionarFragment extends Fragment {
         return v;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    /*Método responsável para validar campos obrigatórios e inlcuir um novo registro de cliente*/
     private void adicionar() {
         if (etNomeCompleto.getText().toString().equals("")) {
             Toast.makeText(getActivity(), "Por favor, informe o nome completo do cliente", Toast.LENGTH_LONG).show();
